@@ -1,9 +1,13 @@
 import express from 'express';
+import userRoutes from "./routes/user.js"
 // require('dotenv').config()
 const app = express();
 
 const PORT = process.env.PORT || 8000;
 
+
+// using routes
+app.use('/ap1/v1/user', userRoutes)
 
 
 app.get('/', (req , res) => {
