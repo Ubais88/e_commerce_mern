@@ -4,7 +4,7 @@ const router = express.Router();
 import { newUser } from "../controllers/user.js";
 
 
-router.post('/new', newUser)
+router.post('/new', newUser )
 
 
 
