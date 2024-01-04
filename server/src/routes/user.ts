@@ -7,7 +7,7 @@ import { isAdmin } from "../middlewares/auth.js";
 
 router.post('/new',isAdmin , newUser )
 router.get('/all',isAdmin , getAllUsers )
-router.get('/:id',isAdmin , getUser )
+router.get('/:id' , getUser )
 router.delete('/:id',isAdmin , deleteUser )
 
 

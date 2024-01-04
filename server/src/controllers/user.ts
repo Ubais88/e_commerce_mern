@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../models/user.js";
-import { NewUserRequestBody } from "../types/types.js";
+import { NewUserRequestBody , Params } from "../types/types.js";
 import ErrorHandler from "../utils/utility-class.js";
+
+
 
 export const newUser = async (
   req: Request<{}, {}, NewUserRequestBody>,
@@ -60,12 +62,12 @@ export const getAllUsers = async (
 };
 
 export const getUser = async (
-  req: Request<{}, {}, NewUserRequestBody>,
+  req: Request<Params, {}, NewUserRequestBody>,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { id } = req.params;
+    const  id  = req.params.id;
 
     const user = await User.findById({ _id: id });
     if (!user) {
@@ -82,7 +84,7 @@ export const getUser = async (
 };
 
 export const deleteUser = async (
-  req: Request<{}, {}, NewUserRequestBody>,
+  req: Request<Params, {}, NewUserRequestBody>,
   res: Response,
   next: NextFunction
 ) => {

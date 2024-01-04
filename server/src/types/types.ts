@@ -8,3 +8,7 @@ export interface NewUserRequestBody {
   dob: Date;
 }
 
+export interface Params {
+  id: string;
+}
+
