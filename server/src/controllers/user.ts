@@ -66,17 +66,46 @@ export const getUser = async (
 ) => {
   try {
     const { id } = req.params;
-    const user = await User.findById({_id:id});
-    if(!user){
-        return next(new ErrorHandler("User not found with this ID",400))
+
+    const user = await User.findById({ _id: id });
+    if (!user) {
+      return next(new ErrorHandler("User not found with this ID", 400));
     }
     res.status(200).json({
-        success: true,
-        data:user,
-        message:"user fetched successfully"
-    })
-
+      success: true,
+      data: user,
+      message: "user fetched successfully",
+    });
   } catch (error) {
     return next(error);
+  }
+};
+
+export const deleteUser = async (
+  req: Request<{}, {}, NewUserRequestBody>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById({ _id: id });
+    if (!user) {
+      return next(new ErrorHandler("User not found with this ID", 400));
+    }
+
+    const deleteUser = await user.deleteOne();
+
+    if (!deleteUser) {
+      return next(new ErrorHandler("Delete user failed", 402));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: deleteUser,
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    next(error);
   }
 };
